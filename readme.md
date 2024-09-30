@@ -1,3 +1,6 @@
+# Delivery
+Important, contrary to what is written in the `Packaging Callenge.pdf` the assigment is completed by pushing your code into master.
+
 # Constraints
 
 You should write a class `com.mobiquity.packer.Packer` with a static API method named pack. This method accepts the absolute path to a test file as a String. The test file will be in UTF-8 format. The pack method returns the solution as a String.
