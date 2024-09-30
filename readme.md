@@ -1,5 +1,5 @@
 # Delivery
-Important, contrary to what is written in the `Packaging Callenge.pdf` the assigment is completed by pushing your code into master.
+Important: The assigment must be completed by pushing your code into master.
 
 # Constraints
 
