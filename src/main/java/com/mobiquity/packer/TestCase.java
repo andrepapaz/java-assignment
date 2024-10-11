@@ -6,99 +6,42 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class TestCase {
+public record TestCase(int limitWeight, List<Item> listItems, String line) {
 
-    private int limitWeight;
-    private List<Item> listItems;
-    private String output;
-    private String line;
-
-    public TestCase() {
-
-    }
-
-    public TestCase(int limitWeight, List<Item> listItems) {
-        this.limitWeight = limitWeight;
-        this.listItems = listItems;
-    }
-
-    public TestCase(int limitWeight, List<Item> listItems, String line) {
-        this.limitWeight = limitWeight;
-        this.listItems = listItems;
-        this.line = line;
-    }
-
-    public int getLimitWeight() {
-        return limitWeight;
-    }
-
-    public void setLimitWeight(int limitWeight) {
-        this.limitWeight = limitWeight;
-    }
-
-    public List<Item> getListItems() {
-        return listItems;
-    }
-
-    public void setListItems(List<Item> listItems) {
-        this.listItems = listItems;
-    }
-
-    public void setOutput(String output) {
-        this.output = output;
-    }
-
-    public String getOutput() {
-        return output;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
-    public static TestCase generatePackagesAndFillOutputs(TestCase testCase) {
-        if (testCase.getLine().isEmpty()) {
-            testCase.setOutput("Line cannot be empty");
-            return testCase;
+    public static String generatePackagesAndFillOutputs(TestCase testCase) {
+        if (testCase.line().isEmpty()) {
+            return "Line cannot be empty";
         }
 
         if (testCase.listItems.isEmpty()) {
-            testCase.setOutput("Line Error. Check the pattern: " + testCase.getLine());
-            return testCase;
+            return "Line Error. Check the pattern: " + testCase.line();
         }
 
         if (testCase.listItems.size() > 15) {
-            testCase.setOutput("TestCase cannot have more than 15 items");
-            return testCase;
+            return "TestCase cannot have more than 15 items";
         }
 
-        if (testCase.getLimitWeight() > 100) {
-            testCase.setOutput("Package Weight cannot be more than 100: " + testCase.getLine());
-            return testCase;
+        if (testCase.limitWeight() > 100) {
+            return "Package Weight cannot be more than 100: " + testCase.line();
         }
 
-        if (testCase.getListItems().stream().anyMatch(item -> item.weight() > 100.0)) {
-            testCase.setOutput("Items Weight cannot be more than 100: " + testCase.getLine());
-            return testCase;
+        if (testCase.listItems().stream().anyMatch(item -> item.weight() > 100.0)) {
+            return "Items Weight cannot be more than 100: " + testCase.line();
         }
 
         Set<Package> packages = new HashSet<>();
 
-        GeneratePackages.generate(packages, testCase.getListItems());
+        List<Item> itemsSmallerThanPackageLimitWeight = testCase.listItems().stream().filter(item -> item.weight() <= testCase.limitWeight()).toList();
+
+        GeneratePackages.generate(packages, itemsSmallerThanPackageLimitWeight);
 
         Package aPackage = packages.stream()
-                .filter(p -> p.weight() <= testCase.getLimitWeight())
+                .filter(p -> p.weight() <= testCase.limitWeight())
                 .sorted(Comparator.comparingDouble(Package::weight))
                 .max(Comparator.comparingInt(Package::cost))
                 .orElseGet(() -> new Package("-", 0.0, 0));
 
-        testCase.setOutput(aPackage.indexItems());
-
-        return testCase;
+        return aPackage.indexItems();
     }
 
     @Override

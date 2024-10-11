@@ -11,8 +11,8 @@ class TestCaseTest {
 
         TestCase testCase = Validate.isValidLine("");
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(testCase);
-        assertEquals("Line cannot be empty", returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(testCase);
+        assertEquals("Line cannot be empty", outputTestCase);
     }
 
     @Test
@@ -22,8 +22,8 @@ class TestCaseTest {
 
         TestCase noSpacesTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(noSpacesTestCase);
-        assertEquals("Line Error. Check the pattern: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(noSpacesTestCase);
+        assertEquals("Line Error. Check the pattern: " + line, outputTestCase);
     }
 
     @Test
@@ -33,8 +33,8 @@ class TestCaseTest {
 
         TestCase noPackageWeightTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(noPackageWeightTestCase);
-        assertEquals("Line Error. Check the pattern: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(noPackageWeightTestCase);
+        assertEquals("Line Error. Check the pattern: " + line, outputTestCase);
     }
 
     @Test
@@ -44,8 +44,8 @@ class TestCaseTest {
 
         TestCase noListItemsTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
-        assertEquals("Line Error. Check the pattern: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
+        assertEquals("Line Error. Check the pattern: " + line, outputTestCase);
     }
 
     @Test
@@ -55,8 +55,8 @@ class TestCaseTest {
 
         TestCase noListItemsTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
-        assertEquals("Line Error. Check the pattern: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
+        assertEquals("Line Error. Check the pattern: " + line, outputTestCase);
     }
 
     @Test
@@ -66,8 +66,8 @@ class TestCaseTest {
 
         TestCase noListItemsTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
-        assertEquals("Line Error. Check the pattern: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(noListItemsTestCase);
+        assertEquals("Line Error. Check the pattern: " + line, outputTestCase);
     }
 
     @Test
@@ -77,8 +77,8 @@ class TestCaseTest {
 
         TestCase overLimitWeightTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(overLimitWeightTestCase);
-        assertEquals("Package Weight cannot be more than 100: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(overLimitWeightTestCase);
+        assertEquals("Package Weight cannot be more than 100: " + line, outputTestCase);
     }
 
     @Test
@@ -102,8 +102,8 @@ class TestCaseTest {
                 "(15,2.05,€3) " +
                 "(16,2.05,€3)");
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(testCase);
-        assertEquals("TestCase cannot have more than 15 items", returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(testCase);
+        assertEquals("TestCase cannot have more than 15 items", outputTestCase);
     }
 
     @Test
@@ -113,8 +113,8 @@ class TestCaseTest {
 
         TestCase overLimitWeightTestCase = Validate.isValidLine(line);
 
-        TestCase returnTestCase = TestCase.generatePackagesAndFillOutputs(overLimitWeightTestCase);
-        assertEquals("Items Weight cannot be more than 100: " + line, returnTestCase.getOutput());
+        String outputTestCase = TestCase.generatePackagesAndFillOutputs(overLimitWeightTestCase);
+        assertEquals("Items Weight cannot be more than 100: " + line, outputTestCase);
     }
 
 }

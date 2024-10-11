@@ -26,7 +26,6 @@ public class Packer {
         return lines
                 .map(Validate::isValidLine)
                 .map(TestCase::generatePackagesAndFillOutputs)
-                .map(TestCase::getOutput)
                 .collect(Collectors.joining("\n"));
 
     }
